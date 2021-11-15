@@ -10917,7 +10917,7 @@ bool SiIsEnterpriseFunctionsRestrictedOnOpenSource(CEDAR *c)
 		ret = true;
 	}
 
-	return ret;
+	return false;
 }
 
 // Update the current region
