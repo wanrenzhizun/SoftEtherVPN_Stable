@@ -1,4 +1,4 @@
-name: Makefile CI
+name: check_sha256sum
 
 on:
   workflow_dispatch:
