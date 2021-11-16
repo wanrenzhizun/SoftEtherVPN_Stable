@@ -1,10 +1,13 @@
 name: Makefile CI
 
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: '需要检查的tag名称'
+        required: true
+        default: '4.38-9760-rtm'
+      
 
 jobs:
   build:
@@ -12,16 +15,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: configure
-      run: ./configure
-      
-    - name: Install dependencies
-      run: make
-      
-    - name: Run check
-      run: make check
-      
-    - name: Run distcheck
-      run: make distcheck
+    - name: sha256sum
+      run: |
+        wget https://github.com/wanrenzhizun/SoftEtherVPN_Stable/archive/refs/tags/v${{ github.event.inputs.tag_name }}.tar.gz source.tar.gz
+        sha256sum source.tar.gz
