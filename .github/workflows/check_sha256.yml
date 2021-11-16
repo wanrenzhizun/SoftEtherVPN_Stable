@@ -6,7 +6,7 @@ on:
       tag_name:
         description: '需要检查的tag名称'
         required: true
-        default: '4.38-9760-rtm'
+        default: 'v4.38-9760-rtm'
       
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
+    - name: download
+      run: wget https://github.com/wanrenzhizun/SoftEtherVPN_Stable/archive/refs/tags/${{ github.event.inputs.tag_name }}.tar.gz
     - name: sha256sum
-      run: |
-        wget https://github.com/wanrenzhizun/SoftEtherVPN_Stable/archive/refs/tags/v${{ github.event.inputs.tag_name }}.tar.gz source.tar.gz
-        sha256sum source.tar.gz
+      run: sha256sum ${{ github.event.inputs.tag_name }}.tar.gz
